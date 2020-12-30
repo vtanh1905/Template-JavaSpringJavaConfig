@@ -55,7 +55,9 @@ public class BaseRepositoryImpl<T, E> implements BaseRepository<T, E> {
 		try {
 			Session session = sessionFactory.openSession();
 			T element = session.find(entity, id);
-			session.delete(element);
+			if(element != null) {
+				session.delete(element);
+			}
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
