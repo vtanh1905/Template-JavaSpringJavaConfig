@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -47,8 +48,17 @@ public class HibernateConfig {
 		
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
-		factoryBean.setHibernateProperties(properties);;
+//		properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+		factoryBean.setHibernateProperties(properties);
 		
 		return factoryBean;
 	}
+	
+	@Bean
+	public HibernateTransactionManager transactionManager() {
+		HibernateTransactionManager manager = new HibernateTransactionManager();
+		manager.setSessionFactory(sessionFactory().getObject());
+		return manager;
+	}
+
 }

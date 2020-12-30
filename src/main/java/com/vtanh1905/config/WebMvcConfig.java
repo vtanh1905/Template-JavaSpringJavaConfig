@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.vtanh1905.controller")
+@ComponentScan(basePackages = "com.vtanh1905")
 public class WebMvcConfig implements WebMvcConfigurer {
 	
 	public void configureViewResolvers(ViewResolverRegistry registry) {
